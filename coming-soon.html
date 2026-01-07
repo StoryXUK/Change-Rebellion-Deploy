@@ -54,24 +54,6 @@
 
 
 
-
-	<!-- Typewriter effect CSS -->
-	<style>
-		.typewriter-cursor {
-			display: inline-block;
-			animation: blink 1s step-end infinite;
-			margin-left: 2px;
-		}
-
-		@keyframes blink {
-			0%, 50% {
-				opacity: 1;
-			}
-			51%, 100% {
-				opacity: 0;
-			}
-		}
-	</style>
 </head>
 
 
@@ -148,29 +130,7 @@
 
 					</div> <!-- /.tt-header-col -->
 
-					<div class="tt-header-col">
-
-						<!-- Begin overlay menu toggle button -->
-						<div id="tt-ol-menu-toggle-btn-wrap">
-							<div class="tt-ol-menu-toggle-btn-text">
-								<span class="text-menu" data-hover="Open">Menu</span>
-								<span class="text-close">Close</span>
-							</div>
-							<div class="tt-ol-menu-toggle-btn-holder">
-								<a href="#" class="tt-ol-menu-toggle-btn magnetic-item"><span></span></a>
-							</div>
-						</div>
-						<!-- End overlay menu toggle button -->
-
-						<!-- Begin overlay menu 
-							======================== 
-							* Use class "tt-ol-menu-center" to align menu to center.
-							* Use class "tt-ol-menu-count" to enable menu counter.
-							-->
-
-						<!-- End overlay menu -->
-
-					</div> <!-- /.header-col -->
+					
 				</div> <!-- /.header-inner -->
 			</header>
 			<!-- End header -->
@@ -217,8 +177,10 @@
 						<div class="ph-caption max-width-1000">
 							<h1 class="ph-caption-title ph-appear font-normal"><em>Change Is Coming</em>
 							</h1>
-							<h3 class="ph-caption-title-small ph-appear font-normal">
-								<span id="typewriter-text"></span><span class="typewriter-cursor">|</span>
+							<h3 class="ph-caption-title-small ph-appear font-normal">Exciting things are happening!
+								We’re in the midst of making our website <em><u>even more sexy.</u></em> Thanks for
+								hanging in there with us something awesome is coming
+
 							</h3>
 							<div class="ph-caption-title-ghost ph-appear">Hello!</div>
 							<!-- <div class="ph-caption-subtitle ph-appear">Subtitle</div> -->
@@ -401,32 +363,6 @@
 	<script src="assets/vendor/gsap/gsap.min.js"></script> <!-- GSAP JS (https://greensock.com/gsap/) -->
 	<script src="assets/vendor/gsap/ScrollToPlugin.min.js"></script>
 	<!-- GSAP ScrollToPlugin JS (https://greensock.com/scrolltoplugin/) -->
-
-	<!-- Typewriter effect JavaScript -->
-	<script>
-		document.addEventListener("DOMContentLoaded", function() {
-			const text = "Exciting things are happening! We're in the midst of making our website even more sexy. Thanks for hanging in there with us something awesome is coming!";
-			const typewriterElement = document.getElementById("typewriter-text");
-			let index = 0;
-			const speed = 50; // milliseconds per character
-
-			function typeWriter() {
-				if (index < text.length) {
-					// Handle special formatting
-					if (text.substring(index, index + 10) === "even more ") {
-						typewriterElement.innerHTML += "<em><u>even more sexy.</u></em>";
-						index += 16; // Skip "even more sexy."
-					} else {
-						typewriterElement.innerHTML += text.charAt(index);
-						index++;
-					}
-					setTimeout(typeWriter, speed);
-				}
-			}
-
-			typeWriter();
-		});
-	</script>
 	<script src="assets/vendor/gsap/ScrollTrigger.min.js"></script>
 	<!-- GSAP ScrollTrigger JS (https://greensock.com/scrolltrigger/) -->
 
