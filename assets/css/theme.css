@@ -2122,7 +2122,7 @@ body:not(.tt-boxed) .page-header-inner,
 .ph-caption-title {
 	position: relative;
 	margin: 0;
-	font-size: clamp(40px, 5vw, 94px);
+	font-size: clamp(30px, 3.75vw, 70px);
 	font-weight: bold;
 	font-weight: 500;
 	color: #FFF;
