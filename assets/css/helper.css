@@ -262,11 +262,11 @@ p.text-xlg {
 	margin-bottom: 4.5% !important;
 }
 
-.text-xxlg {
+. {
 	font-size: calc(100% + 0.7vw) !important;
 }
-.text-xxlg p,
-p.text-xxlg {
+. p,
+p. {
 	margin-bottom: 5.5% !important;
 }
 
