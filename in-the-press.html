@@ -53,12 +53,31 @@
 
 	<!-- Custom styles for 6-column grid -->
 	<style>
+		/* Override isotope positioning to use flexbox */
+		.ttgr-layout-6 .tt-grid-items-wrap {
+			display: flex !important;
+			flex-wrap: wrap !important;
+			align-items: stretch;
+		}
 		.ttgr-layout-6 .tt-grid-item {
-			width: 16.666%;
+			width: 16.666% !important;
+			position: relative !important;
+			left: auto !important;
+			top: auto !important;
+			transform: none !important;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		.ttgr-layout-6 .tt-grid-item .ttgr-item-inner {
+			width: 100%;
 		}
 		.ttgr-layout-6 .tt-grid-item .pgi-image {
 			padding-bottom: 0 !important;
 			position: relative !important;
+			height: auto !important;
 		}
 		.ttgr-layout-6 .tt-grid-item .pgi-image img {
 			position: relative !important;
@@ -72,17 +91,17 @@
 		}
 		@media (max-width: 1200px) {
 			.ttgr-layout-6 .tt-grid-item {
-				width: 25%; /* 4 columns on medium screens */
+				width: 25% !important; /* 4 columns on medium screens */
 			}
 		}
 		@media (max-width: 768px) {
 			.ttgr-layout-6 .tt-grid-item {
-				width: 33.333%; /* 3 columns on tablets */
+				width: 33.333% !important; /* 3 columns on tablets */
 			}
 		}
 		@media (max-width: 480px) {
 			.ttgr-layout-6 .tt-grid-item {
-				width: 50%; /* 2 columns on mobile */
+				width: 50% !important; /* 2 columns on mobile */
 			}
 		}
 	</style>
