@@ -7749,7 +7749,7 @@ blockquote.open-quote::before {
 	content: open-quote;
 	top: 0;
 	left: 0;
-	font-size: 50px;
+	font-size: 35px;
 	font-weight: 300;
 	color: #D2D2D2;
 	line-height: 1;
