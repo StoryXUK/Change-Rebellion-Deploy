@@ -51,8 +51,30 @@
 	<link rel="stylesheet" href="assets/css/helper.css">
 	<link rel="stylesheet" href="assets/css/theme.css">
 
-
-
+	<!-- Custom styles for 6-column grid -->
+	<style>
+		.ttgr-layout-6 .tt-grid-item {
+			width: 16.666%;
+		}
+		.ttgr-layout-6 .tt-grid-item .pgi-image {
+			padding-bottom: 100%; /* Square aspect ratio */
+		}
+		@media (max-width: 1200px) {
+			.ttgr-layout-6 .tt-grid-item {
+				width: 25%; /* 4 columns on medium screens */
+			}
+		}
+		@media (max-width: 768px) {
+			.ttgr-layout-6 .tt-grid-item {
+				width: 33.333%; /* 3 columns on tablets */
+			}
+		}
+		@media (max-width: 480px) {
+			.ttgr-layout-6 .tt-grid-item {
+				width: 50%; /* 2 columns on mobile */
+			}
+		}
+	</style>
 
 </head>
 
@@ -304,7 +326,7 @@
 									* Use class "ttgr-not-cropped" to enable not cropped mode (effect only with classes "ttgr-layout-2", "ttgr-layout-3" and "ttgr-layout-4").
 									* Use class "ttgr-shifted" to enable shifted layout (effect only with classes "ttgr-layout-2", "ttgr-layout-3" and "ttgr-layout-4").
 									-->
-								<div class="tt-grid ttgr-layout-3 ttgr-portrait ttgr-shifted ttgr-gap-4">
+								<div class="tt-grid ttgr-layout-6 ttgr-gap-2">
 
 									<!-- Begin tt-Ggrid top content 
 										================================ -->
