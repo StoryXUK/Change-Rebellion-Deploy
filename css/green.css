@@ -228,22 +228,26 @@ body.rgg-page {
 			height: 100%;
 		}
 
-		body.rgg-page.green-mode .scroll-down-circle .sdc-inner::before {
+		body.rgg-page .scroll-down-circle .rgg-scroll-earth {
+			display: none;
+		}
+
+		body.rgg-page.green-mode .scroll-down-circle .rgg-scroll-earth {
 			position: absolute;
-			content: "";
+			display: block;
 			left: 50%;
 			top: 50%;
 			width: 130px;
 			height: 130px;
-			background: url("../assets/img/earth-faint.svg") center / contain no-repeat;
 			opacity: 0.16;
 			transform: translate(-50%, -50%);
 			pointer-events: none;
 			z-index: 1;
 		}
 
-		body.rgg-page.green-mode .scroll-down-circle .sdc-icon {
-			display: none;
+		body.rgg-page.green-mode .scroll-down-circle .sdc-icon,
+		body.rgg-page.green-mode .scroll-down-circle .sdc-icon i {
+			display: none !important;
 		}
 
 		body.rgg-page.green-mode .scroll-down-circle svg {
