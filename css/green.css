@@ -233,8 +233,8 @@ body.rgg-page {
 			content: "";
 			left: 50%;
 			top: 50%;
-			width: 96px;
-			height: 96px;
+			width: 130px;
+			height: 130px;
 			background: url("../assets/img/earth-faint.svg") center / contain no-repeat;
 			opacity: 0.16;
 			transform: translate(-50%, -50%);
@@ -243,8 +243,7 @@ body.rgg-page {
 		}
 
 		body.rgg-page.green-mode .scroll-down-circle .sdc-icon {
-			color: var(--rgg-sage);
-			z-index: 2;
+			display: none;
 		}
 
 		body.rgg-page.green-mode .scroll-down-circle svg {
