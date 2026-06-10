@@ -162,6 +162,18 @@ body.rgg-page {
 			border-bottom: 1px solid var(--rgg-border);
 		}
 
+		body.rgg-page .rgg-hero-image-green {
+			display: none;
+		}
+
+		body.rgg-page.green-mode .rgg-hero-image-dark {
+			display: none;
+		}
+
+		body.rgg-page.green-mode .rgg-hero-image-green {
+			display: block;
+		}
+
 		body.rgg-page.green-mode .ph-image-inner::before {
 			background-color: var(--rgg-forest);
 			opacity: 0.18;
@@ -210,8 +222,34 @@ body.rgg-page {
 			opacity: 0.72;
 		}
 
+		body.rgg-page.green-mode .scroll-down-circle .sdc-inner {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+
+		body.rgg-page.green-mode .scroll-down-circle .sdc-inner::before {
+			position: absolute;
+			content: "";
+			left: 50%;
+			top: 50%;
+			width: 96px;
+			height: 96px;
+			background: url("../assets/img/earth-faint.svg") center / contain no-repeat;
+			opacity: 0.16;
+			transform: translate(-50%, -50%);
+			pointer-events: none;
+			z-index: 1;
+		}
+
 		body.rgg-page.green-mode .scroll-down-circle .sdc-icon {
 			color: var(--rgg-sage);
+			z-index: 2;
+		}
+
+		body.rgg-page.green-mode .scroll-down-circle svg {
+			position: relative;
+			z-index: 3;
 		}
 
 		body.rgg-page.green-mode .scroll-down-circle text {
