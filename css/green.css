@@ -129,11 +129,16 @@ body.rgg-page {
 			animation: rgg-body-jolt 0.86s steps(1, end);
 		}
 
-		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-header .tt-logo-light {
+		body.rgg-page #tt-header .tt-logo-green {
 			display: none;
 		}
 
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-header .tt-logo-light,
 		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-header .tt-logo-dark {
+			display: none;
+		}
+
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-header .tt-logo-green {
 			display: inline-block;
 		}
 
