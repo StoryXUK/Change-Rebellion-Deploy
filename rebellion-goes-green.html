@@ -51,10 +51,491 @@
 	<link rel="stylesheet" href="assets/css/helper.css">
 	<link rel="stylesheet" href="assets/css/theme.css">
 
-	
+	<style>
+		body.rgg-page {
+			--rgg-cream: #f6f8f0;
+			--rgg-mist: #e7f0e3;
+			--rgg-panel: rgba(255, 255, 250, 0.72);
+			--rgg-forest: #183b2a;
+			--rgg-green: #6f996f;
+			--rgg-sage: #9fb89c;
+			--rgg-border: rgba(24, 59, 42, 0.16);
+			--rgg-gold: #d5c27a;
+			background: #0a0a0a;
+			color: #fff;
+		}
+
+		body.rgg-page.green-mode {
+			background:
+				radial-gradient(circle at 50% 16%, rgba(182, 211, 177, 0.32), transparent 36%),
+				linear-gradient(180deg, var(--rgg-cream) 0%, var(--rgg-mist) 100%);
+			color: var(--rgg-forest);
+		}
+
+		body.rgg-page #body-inner,
+		body.rgg-page #content-wrap,
+		body.rgg-page #page-content {
+			transition: background-color 0.3s ease, color 0.3s ease;
+		}
+
+		body.rgg-page.green-mode #body-inner,
+		body.rgg-page.green-mode #content-wrap,
+		body.rgg-page.green-mode #page-content {
+			background: transparent;
+			color: var(--rgg-forest);
+		}
+
+		body.rgg-page.green-mode .bg-noise {
+			opacity: 0.035;
+			mix-blend-mode: multiply;
+		}
+
+		body.rgg-page::before,
+		body.rgg-page::after {
+			position: fixed;
+			content: "";
+			inset: 0;
+			pointer-events: none;
+			opacity: 0;
+			z-index: 99998;
+		}
+
+		body.rgg-page::before {
+			background:
+				repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.18) 0 1px, transparent 1px 4px),
+				repeating-linear-gradient(90deg, rgba(111, 153, 111, 0.2) 0 2px, transparent 2px 7px),
+				radial-gradient(circle at 30% 35%, rgba(246, 248, 240, 0.8), transparent 18%),
+				#06120b;
+			mix-blend-mode: screen;
+		}
+
+		body.rgg-page::after {
+			background:
+				linear-gradient(90deg, transparent 0 7%, rgba(246, 248, 240, 0.78) 7% 8%, transparent 8% 24%, rgba(111, 153, 111, 0.55) 24% 26%, transparent 26% 100%),
+				linear-gradient(180deg, transparent 0 48%, rgba(24, 59, 42, 0.5) 48% 52%, transparent 52% 100%);
+			clip-path: polygon(0 8%, 100% 0, 100% 18%, 0 27%);
+			mix-blend-mode: multiply;
+		}
+
+		body.rgg-page.transitioning::before {
+			animation: rgg-static-crackle 0.86s steps(2, end) forwards;
+		}
+
+		body.rgg-page.transitioning::after {
+			animation: rgg-glitch-slice 0.86s steps(1, end) forwards;
+		}
+
+		body.rgg-page.transitioning #body-inner {
+			animation: rgg-body-jolt 0.86s steps(1, end);
+		}
+
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-header .tt-logo-light {
+			display: none;
+		}
+
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-header .tt-logo-dark {
+			display: inline-block;
+		}
+
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) #tt-ol-menu-toggle-btn-wrap,
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) .tt-ol-menu-toggle-btn-text,
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) .tt-ol-menu-toggle-btn-text > span {
+			color: var(--rgg-forest);
+		}
+
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) .tt-ol-menu-toggle-btn span,
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) .tt-ol-menu-toggle-btn span::before,
+		body.rgg-page.green-mode:not(.tt-ol-menu-open) .tt-ol-menu-toggle-btn span::after {
+			background-color: var(--rgg-forest);
+		}
+
+		body.rgg-page.green-mode #page-header {
+			min-height: 100vh;
+			background:
+				radial-gradient(circle at 50% 26%, rgba(155, 190, 147, 0.24), transparent 34%),
+				linear-gradient(180deg, rgba(246, 248, 240, 0.98) 0%, rgba(231, 240, 227, 0.96) 100%);
+			border-bottom: 1px solid var(--rgg-border);
+		}
+
+		body.rgg-page #page-header .page-header-inner {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			min-height: 100vh;
+			padding-top: 150px;
+			padding-bottom: 90px;
+		}
+
+		body.rgg-page #page-header .ph-image,
+		body.rgg-page #page-header .ph-caption-title-ghost,
+		body.rgg-page #page-header .made-with-love {
+			display: none;
+		}
+
+		body.rgg-page .ph-caption {
+			width: 100%;
+			max-width: 920px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		body.rgg-page .rgg-hero-title {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin: 0;
+			text-transform: uppercase;
+			line-height: 0.9;
+			letter-spacing: 0;
+			color: #fff;
+		}
+
+		body.rgg-page.green-mode .rgg-hero-title {
+			color: var(--rgg-forest);
+		}
+
+		body.rgg-page .rgg-title-strong {
+			display: block;
+			font-size: clamp(64px, 11vw, 158px);
+			font-weight: 900;
+		}
+
+		body.rgg-page .rgg-title-goes {
+			display: block;
+			margin: 12px 0 18px;
+			font-family: "Noto Serif JP", serif;
+			font-size: clamp(48px, 7vw, 104px);
+			font-style: italic;
+			font-weight: 300;
+			line-height: 1;
+			color: rgba(255, 255, 255, 0.72);
+		}
+
+		body.rgg-page.green-mode .rgg-title-goes {
+			color: rgba(24, 59, 42, 0.68);
+		}
+
+		body.rgg-page .rgg-title-green {
+			color: #9eb893;
+		}
+
+		body.rgg-page.green-mode .rgg-title-green {
+			color: var(--rgg-green);
+			text-shadow: 0 18px 54px rgba(111, 153, 111, 0.28);
+		}
+
+		body.rgg-page .ph-caption-title-small {
+			max-width: 760px;
+			margin: 42px auto 0;
+			font-size: clamp(19px, 2.1vw, 32px);
+			font-weight: 300;
+			line-height: 1.65;
+			color: rgba(255, 255, 255, 0.76);
+		}
+
+		body.rgg-page.green-mode .ph-caption-title-small {
+			color: rgba(24, 59, 42, 0.72);
+		}
+
+		body.rgg-page .ph-caption-title-small strong {
+			color: currentColor;
+		}
+
+		body.rgg-page .rgg-hero-actions {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 18px;
+			margin-top: 54px;
+		}
+
+		body.rgg-page .rgg-hero-button {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 260px;
+			min-height: 66px;
+			padding: 18px 30px;
+			border: 2px solid currentColor;
+			border-radius: 3px;
+			font-size: 15px;
+			font-weight: 800;
+			line-height: 1;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+			transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+		}
+
+		body.rgg-page .rgg-hero-button:hover,
+		body.rgg-page .rgg-hero-button:focus {
+			transform: translateY(-2px);
+		}
+
+		body.rgg-page .rgg-hero-button-primary {
+			background-color: #fff;
+			border-color: #fff;
+			color: #0a0a0a;
+		}
+
+		body.rgg-page .rgg-hero-button-secondary {
+			color: #fff;
+		}
+
+		body.rgg-page.green-mode .rgg-hero-button-primary {
+			background-color: var(--rgg-forest);
+			border-color: var(--rgg-forest);
+			color: var(--rgg-gold);
+		}
+
+		body.rgg-page.green-mode .rgg-hero-button-secondary {
+			border-color: rgba(24, 59, 42, 0.58);
+			color: var(--rgg-forest);
+		}
+
+		body.rgg-page.green-mode .scroll-down-circle {
+			left: 50%;
+			bottom: 24px;
+			width: 92px;
+			height: 92px;
+			transform: translateX(-50%);
+			opacity: 0.72;
+		}
+
+		body.rgg-page.green-mode .scroll-down-circle .sdc-icon {
+			color: var(--rgg-sage);
+		}
+
+		body.rgg-page.green-mode .scroll-down-circle text {
+			fill: var(--rgg-sage);
+			letter-spacing: 18px;
+		}
+
+		body.rgg-page.green-mode .tt-section {
+			background: transparent;
+		}
+
+		body.rgg-page.green-mode p,
+		body.rgg-page.green-mode li,
+		body.rgg-page.green-mode .text-gray {
+			color: rgba(24, 59, 42, 0.72) !important;
+		}
+
+		body.rgg-page.green-mode .tt-heading-title,
+		body.rgg-page.green-mode .tt-heading-subtitle,
+		body.rgg-page.green-mode h1,
+		body.rgg-page.green-mode h2,
+		body.rgg-page.green-mode h3,
+		body.rgg-page.green-mode h4,
+		body.rgg-page.green-mode h5 {
+			color: var(--rgg-forest);
+		}
+
+		.rgg-pricing-card {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			padding: 42px 34px 36px;
+			background-color: rgba(255, 255, 255, 0.045);
+			border: 1px solid rgba(255, 255, 255, 0.13);
+			border-radius: 8px;
+		}
+
+		body.rgg-page.green-mode .rgg-pricing-card {
+			background: var(--rgg-panel);
+			border-color: var(--rgg-border);
+			box-shadow: 0 24px 80px rgba(37, 77, 48, 0.08);
+			backdrop-filter: blur(12px);
+		}
+
+		.rgg-pricing-card h3 {
+			margin: 0 0 14px;
+			font-size: 26px;
+			font-weight: 500;
+			line-height: 1.15;
+			color: #FFF;
+		}
+
+		.rgg-pricing-card .rgg-card-intro {
+			margin-bottom: 32px;
+			color: #b9b9b9;
+		}
+
+		.rgg-pricing-card .rgg-card-label {
+			margin-bottom: 18px;
+			font-size: 13px;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: #FFF;
+		}
+
+		.rgg-pricing-card ul {
+			margin-bottom: 36px;
+			padding-left: 20px;
+		}
+
+		.rgg-pricing-card li {
+			margin-bottom: 13px;
+			color: #b9b9b9;
+		}
+
+		.rgg-pricing-card .rgg-price-wrap {
+			margin-top: auto;
+			padding-top: 28px;
+			border-top: 1px solid rgba(255, 255, 255, 0.13);
+		}
+
+		.rgg-pricing-card .rgg-price-label {
+			display: block;
+			margin-bottom: 8px;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: #b9b9b9;
+		}
+
+		.rgg-pricing-card .rgg-price {
+			margin: 0 0 8px;
+			font-size: 42px;
+			font-weight: 600;
+			line-height: 1;
+			color: #FFF;
+		}
+
+		.rgg-pricing-card .rgg-price-note {
+			margin: 0;
+			font-size: 14px;
+			color: #b9b9b9;
+		}
+
+		body.rgg-page.green-mode .rgg-pricing-card h3,
+		body.rgg-page.green-mode .rgg-pricing-card .rgg-card-label,
+		body.rgg-page.green-mode .rgg-pricing-card .rgg-price {
+			color: var(--rgg-forest);
+		}
+
+		body.rgg-page.green-mode .rgg-pricing-card .rgg-card-intro,
+		body.rgg-page.green-mode .rgg-pricing-card li,
+		body.rgg-page.green-mode .rgg-pricing-card .rgg-price-label,
+		body.rgg-page.green-mode .rgg-pricing-card .rgg-price-note {
+			color: rgba(24, 59, 42, 0.68);
+		}
+
+		body.rgg-page.green-mode .rgg-pricing-card .rgg-price-wrap {
+			border-top-color: var(--rgg-border);
+		}
+
+		body.rgg-page.green-mode .tt-scrolling-text-inner {
+			color: rgba(24, 59, 42, 0.12) !important;
+			-webkit-text-stroke-color: rgba(24, 59, 42, 0.24);
+		}
+
+		body.rgg-page.green-mode #tt-footer {
+			border-top: 1px solid var(--rgg-border);
+			background: rgba(246, 248, 240, 0.7);
+		}
+
+		body.rgg-page.green-mode #tt-footer,
+		body.rgg-page.green-mode #tt-footer a,
+		body.rgg-page.green-mode #tt-footer .tt-copyright,
+		body.rgg-page.green-mode #tt-footer .tt-copyright a,
+		body.rgg-page.green-mode .footer-social,
+		body.rgg-page.green-mode .social-buttons a {
+			color: rgba(24, 59, 42, 0.72);
+		}
+
+		body.rgg-page.green-mode .tt-btn-link::after {
+			background-color: var(--rgg-forest);
+		}
+
+		body.rgg-page.green-mode .tt-btn-link > *,
+		body.rgg-page.green-mode .tt-btn-link > *::after {
+			color: var(--rgg-forest);
+		}
+
+		@keyframes rgg-static-crackle {
+			0% { opacity: 0; transform: translate3d(0, 0, 0); filter: contrast(1); }
+			8% { opacity: 0.86; transform: translate3d(-10px, 4px, 0); filter: contrast(2.1) saturate(0.3); }
+			17% { opacity: 0.18; transform: translate3d(9px, -5px, 0); }
+			28% { opacity: 0.78; transform: translate3d(14px, 2px, 0); filter: invert(1) contrast(1.6); }
+			41% { opacity: 0.34; transform: translate3d(-7px, -3px, 0); }
+			58% { opacity: 0.92; transform: translate3d(5px, 6px, 0); filter: contrast(2.4); }
+			73% { opacity: 0.42; transform: translate3d(-13px, 1px, 0); }
+			100% { opacity: 0; transform: translate3d(0, 0, 0); filter: contrast(1); }
+		}
+
+		@keyframes rgg-glitch-slice {
+			0% { opacity: 0; clip-path: polygon(0 5%, 100% 0, 100% 16%, 0 26%); transform: translateX(0); }
+			14% { opacity: 0.8; clip-path: polygon(0 32%, 100% 25%, 100% 39%, 0 47%); transform: translateX(-18px); }
+			31% { opacity: 0.2; clip-path: polygon(0 63%, 100% 58%, 100% 70%, 0 76%); transform: translateX(13px); }
+			49% { opacity: 0.72; clip-path: polygon(0 12%, 100% 18%, 100% 28%, 0 22%); transform: translateX(22px); }
+			68% { opacity: 0.5; clip-path: polygon(0 80%, 100% 76%, 100% 88%, 0 92%); transform: translateX(-10px); }
+			100% { opacity: 0; clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); transform: translateX(0); }
+		}
+
+		@keyframes rgg-body-jolt {
+			0%, 100% { transform: translate3d(0, 0, 0); filter: none; }
+			12% { transform: translate3d(7px, 0, 0); filter: contrast(1.5); }
+			26% { transform: translate3d(-5px, 0, 0); filter: brightness(1.35); }
+			44% { transform: translate3d(3px, -2px, 0); filter: contrast(0.8) saturate(1.4); }
+			62% { transform: translate3d(-8px, 1px, 0); filter: contrast(1.8); }
+		}
+
+		@media (max-width: 991px) {
+			body.rgg-page #page-header .page-header-inner {
+				padding-top: 120px;
+				padding-bottom: 100px;
+			}
+
+			body.rgg-page .ph-caption-title-small {
+				margin-top: 34px;
+				line-height: 1.55;
+			}
+
+			.rgg-pricing-card {
+				height: auto;
+				margin-bottom: 30px;
+			}
+		}
+
+		@media (max-width: 640px) {
+			body.rgg-page .rgg-title-strong {
+				font-size: clamp(52px, 17vw, 84px);
+			}
+
+			body.rgg-page .rgg-title-goes {
+				font-size: clamp(42px, 13vw, 66px);
+			}
+
+			body.rgg-page .rgg-hero-actions {
+				gap: 12px;
+				margin-top: 38px;
+			}
+
+			body.rgg-page .rgg-hero-button {
+				width: 100%;
+				min-width: 0;
+				min-height: 58px;
+				font-size: 13px;
+			}
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			body.rgg-page,
+			body.rgg-page *,
+			body.rgg-page::before,
+			body.rgg-page::after {
+				animation-duration: 0.001ms !important;
+				animation-iteration-count: 1 !important;
+				scroll-behavior: auto !important;
+				transition-duration: 0.001ms !important;
+			}
+		}
+	</style>
 
 
-</head>
+	</head>
 
 
 <!-- ===========
@@ -66,7 +547,7 @@
 	* Use class "tt-magic-cursor" to enable magic cursor.
 	-->
 
-<body id="body" class="tt-transition tt-boxed tt-smooth-scroll tt-magic-cursor">
+<body id="body" class="rgg-page black-mode tt-transition tt-boxed tt-smooth-scroll tt-magic-cursor">
 
 
 	<!-- *************************************
@@ -233,17 +714,20 @@
 							Use class "max-width-*" to set caption max width if needed. For example "max-width-1000". More info about helper classes can be found in the file "helper.css".
 							-->
 						<div class="ph-caption max-width-1000">
-							<h1 class="ph-caption-title ph-appear font-normal"><em>Rebellion Goes Green</em>
+							<h1 class="ph-caption-title rgg-hero-title ph-appear">
+								<span class="rgg-title-strong">Rebellion</span>
+								<span class="rgg-title-goes">Goes</span>
+								<span class="rgg-title-strong rgg-title-green">Green</span>
 							</h1>
 							<h3 class="ph-caption-title-small ph-appear font-normal">Fixed-price sustainability
-								consultancy — led by our Chief Sustainability Officer — so you know exactly what you're
+								consultancy &mdash; led by our <strong>Chief Sustainability Officer</strong> &mdash; so you know exactly what you're
 								getting, and exactly what it costs.
 							</h3>
 							<div class="ph-caption-title-ghost ph-appear">Hello!</div>
-							<div class="ph-caption-subtitle ph-appear"> After a traditional consultancy? <a
-									target="_blank"
-									href="https://www.google.com/search?q=boring&ie=UTF-8&oe=UTF-8&hl=en-gb&client=safari&zx=1765372504945&no_sw_cr=1"
-									style="font-weight: bold; text-decoration: underline;">Click here</a></div>
+							<div class="rgg-hero-actions ph-appear">
+								<a class="rgg-hero-button rgg-hero-button-primary" href="#rgg-packages">See our packages</a>
+								<a class="rgg-hero-button rgg-hero-button-secondary" href="contact.html">Talk to the team</a>
+							</div>
 
 
 						</div>
@@ -348,7 +832,7 @@
 						<!-- End tt-section -->
 
 
-						<section class="tt-section no-padding-top">
+						<section id="rgg-packages" class="tt-section no-padding-top">
 							<div class="tt-section-inner tt-wrap">
 
 								<div
@@ -425,348 +909,6 @@
 
 
 
-
-						<!-- *************************************
-					*********** Begin page content *********** 
-					************************************** -->
-						<section id="page-content">
-
-							<!-- =======================
-						///// Begin tt-section /////
-						============================ 
-						* You can use padding classes if needed. For example "padding-top-xlg-150", "padding-bottom-xlg-150", "no-padding-top", "no-padding-bottom", etc. Note that each situation may be different and each section may need different classes according to your needs. More info about helper classes can be found in the file "helper.css".
-						-->
-							<div class="tt-section no-padding-bottom">
-								<div class="tt-section-inner">
-
-									<!-- Begin portfolio grid (works combined with tt-Ggrid!)
-								========================== 
-								* Use class "pgi-hover" to enable portfolio grid item hover effect (behavior depends on "ttgr-gap-*" classes below!).
-								* Use class "pgi-cap-hover" to enable portfolio grid item caption hover effect (effect only with class "pgi-cap-inside"! Also no effect on mobile devices!).
-								* Use class "pgi-cap-center" to position portfolio grid item caption to center.
-								* Use class "pgi-cap-inside" to position portfolio grid item caption to inside.
-								-->
-									<div id="portfolio-grid" class="pgi-cap-inside pgi-cap-hover">
-
-										<!-- Begin tt-Grid
-									=================== 
-									* Use class "ttgr-layout-2", "ttgr-layout-3", "ttgr-layout-4" to set grid layout (columns). No class = one column.
-									* Use class "ttgr-layout-1-2", "ttgr-layout-2-1", "ttgr-layout-2-3", "ttgr-layout-3-2", "ttgr-layout-3-4" or "ttgr-layout-4-3" to set grid mixed layout (columns).
-									* Use class "ttgr-layout-creative-1" or "ttgr-layout-creative-2" to set grid creative mixed layout (no effect with classes "ttgr-portrait", "ttgr-portrait-half", "ttgr-not-cropped" and "ttgr-shifted").
-									* Use class "ttgr-portrait" or "ttgr-portrait-half" to enable portrait mode (no effect with classes "ttgr-layout-creative-1", "ttgr-layout-creative-2" and "ttgr-not-cropped").
-									* Use class "ttgr-gap-1", "ttgr-gap-2", "ttgr-gap-3", "ttgr-gap-4", "ttgr-gap-5" or "ttgr-gap-6" to add space between items.
-									* Use class "ttgr-not-cropped" to enable not cropped mode (effect only with classes "ttgr-layout-2", "ttgr-layout-3" and "ttgr-layout-4").
-									* Use class "ttgr-shifted" to enable shifted layout (effect only with classes "ttgr-layout-2", "ttgr-layout-3" and "ttgr-layout-4").
-									-->
-										<div class="tt-grid ttgr-layout-creative-2 ttgr-gap-6">
-
-
-											<!-- End tt-Grid top content -->
-
-
-											<!-- Begin tt-Heading 
-								====================== 
-								* Use class "tt-heading-xsm", "tt-heading-sm", "tt-heading-lg", "tt-heading-xlg" or "tt-heading-xxlg" to set caption size (no class = default size).
-								* Use class "tt-heading-stroke" to enable stroke style.
-								* Use class "tt-heading-center" to align tt-Heading to center.
-								* Use prepared helper class "max-width-*" to add custom width if needed. Example: "max-width-800". More info about helper classes can be found in the file "helper.css".
-								-->
-											<div
-												class="tt-heading tt-heading-xxlg tt-heading-stroke tt-heading-center margin-bottom-10-p anim-fadeinup">
-												<h3 class="tt-heading-subtitle text-gray">Change Management</h3>
-												<h2 class="tt-heading-title">Simplified</h2>
-											</div>
-											<!-- End tt-Heading -->
-
-
-											<!-- Begin tt-Grid items wrap 
-										============================== -->
-											<div class="tt-grid-items-wrap isotope-items-wrap">
-
-												<!-- Begin tt-Grid item
-											======================== -->
-
-												<!-- Begin tt-Grid item
-											======================== -->
-												<div class="tt-grid-item isotope-item people">
-													<div class="ttgr-item-inner">
-
-														<!-- Begin portfolio grid item 
-												===============================
-												* Use class "pgi-image-is-light" if needed, it makes the caption visible better if you use light image (only effect if "pgi-cap-inside" is enabled on "portfolio-grid"! Also no effect on small screens!).
-												-->
-														<div class="portfolio-grid-item">
-															<a href="reality-check.html" class="pgi-image-wrap"
-																data-cursor="View<br>Model">
-																<!-- Use class "cover-opacity-*" to set image overlay if needed. For example "cover-opacity-2". Useful if class "pgi-cap-inside" is enabled on "portfolio-grid". Note: It is individual and depends on the image you use. More info about helper classes in file "helper.css". -->
-																<div class="pgi-image-holder cover-opacity-2">
-																	<div class="pgi-image-inner anim-zoomin">
-																		<figure class="pgi-image ttgr-height">
-																			<img src="img/portfolio-6.webp" alt="image">
-																		</figure> <!-- /.pgi-image -->
-																	</div> <!-- /.pgi-image-inner -->
-																</div> <!-- /.pgi-image-holder -->
-															</a> <!-- /.pgi-image-wrap -->
-
-															<div class="pgi-caption">
-																<div class="pgi-caption-inner">
-																	<h2 class="pgi-title">The Change Rebellion Reality
-																		Check</h2>
-																	<div class="pgi-categories-wrap">
-																		<!-- <div class="pgi-category">Model</div> -->
-																		<!-- <div class="pgi-category">Varia</div> -->
-																	</div> <!-- /.pli-categories-wrap -->
-																</div> <!-- /.pgi-caption-inner -->
-															</div> <!-- /.pgi-caption -->
-														</div>
-														<!-- End portfolio grid item -->
-
-													</div> <!-- /.ttgr-item-inner -->
-												</div>
-												<!-- End tt-Grid item -->
-
-												<!-- Begin tt-Grid item
-										======================== -->
-
-												<!-- Begin tt-Grid item
-											======================== -->
-												<div class="tt-grid-item isotope-item people">
-													<div class="ttgr-item-inner">
-
-														<!-- Begin portfolio grid item 
-												===============================
-												* Use class "pgi-image-is-light" if needed, it makes the caption visible better if you use light image (only effect if "pgi-cap-inside" is enabled on "portfolio-grid"! Also no effect on small screens!).
-												-->
-														<div class="portfolio-grid-item">
-															<a href="fixed.html" class="pgi-image-wrap"
-																data-cursor="View<br>Model">
-																<!-- Use class "cover-opacity-*" to set image overlay if needed. For example "cover-opacity-2". Useful if class "pgi-cap-inside" is enabled on "portfolio-grid". Note: It is individual and depends on the image you use. More info about helper classes in file "helper.css". -->
-																<div class="pgi-image-holder cover-opacity-2">
-																	<div class="pgi-image-inner anim-zoomin">
-																		<figure class="pgi-image ttgr-height">
-																			<img src="img/portfolio-3.webp" alt="image">
-																		</figure> <!-- /.pgi-image -->
-																	</div> <!-- /.pgi-image-inner -->
-																</div> <!-- /.pgi-image-holder -->
-															</a> <!-- /.pgi-image-wrap -->
-
-															<div class="pgi-caption">
-																<div class="pgi-caption-inner">
-																	<h2 class="pgi-title">Fixed Price Deliverables</h2>
-																	<div class="pgi-categories-wrap">
-																		<!-- <div class="pgi-category">Model</div> -->
-																		<!-- <div class="pgi-category">Varia</div> -->
-																	</div> <!-- /.pli-categories-wrap -->
-																</div> <!-- /.pgi-caption-inner -->
-															</div> <!-- /.pgi-caption -->
-														</div>
-														<!-- End portfolio grid item -->
-
-													</div> <!-- /.ttgr-item-inner -->
-												</div>
-												<!-- End tt-Grid item -->
-
-												<!-- Begin tt-Grid item
-										======================== -->
-
-
-												<!-- Begin tt-Grid item
-											======================== -->
-												<div class="tt-grid-item isotope-item people">
-													<div class="ttgr-item-inner">
-
-														<!-- Begin portfolio grid item 
-												===============================
-												* Use class "pgi-image-is-light" if needed, it makes the caption visible better if you use light image (only effect if "pgi-cap-inside" is enabled on "portfolio-grid"! Also no effect on small screens!).
-												-->
-														<div class="portfolio-grid-item">
-															<a href="engine.html" class="pgi-image-wrap"
-																data-cursor="View<br>Model">
-																<!-- Use class "cover-opacity-*" to set image overlay if needed. For example "cover-opacity-2". Useful if class "pgi-cap-inside" is enabled on "portfolio-grid". Note: It is individual and depends on the image you use. More info about helper classes in file "helper.css". -->
-																<div class="pgi-image-holder cover-opacity-2">
-																	<div class="pgi-image-inner anim-zoomin">
-																		<figure class="pgi-image ttgr-height">
-																			<img src="img/portfolio-5.webp" alt="image">
-																		</figure> <!-- /.pgi-image -->
-																	</div> <!-- /.pgi-image-inner -->
-																</div> <!-- /.pgi-image-holder -->
-															</a> <!-- /.pgi-image-wrap -->
-
-															<div class="pgi-caption">
-																<div class="pgi-caption-inner">
-																	<h2 class="pgi-title">The Change Evolution Engine
-																	</h2>
-																	<div class="pgi-categories-wrap">
-																		<!-- <div class="pgi-category">Model</div> -->
-																		<!-- <div class="pgi-category">Varia</div> -->
-																	</div> <!-- /.pli-categories-wrap -->
-																</div> <!-- /.pgi-caption-inner -->
-															</div> <!-- /.pgi-caption -->
-														</div>
-														<!-- End portfolio grid item -->
-
-													</div> <!-- /.ttgr-item-inner -->
-												</div>
-												<!-- End tt-Grid item -->
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</section>
-
-						<!-- =======================
-						///// Begin tt-section /////
-						============================ 
-						* You can use padding classes if needed. For example "padding-top-xlg-150", "padding-bottom-xlg-150", "no-padding-top", "no-padding-bottom", etc. Note that each situation may be different and each section may need different classes according to your needs. More info about helper classes can be found in the file "helper.css".
-						-->
-						<div class="tt-section padding-top-xlg-150 padding-bottom-xlg-150">
-							<div class="tt-section-inner tt-wrap">
-
-								<div class="tt-row">
-									<div class="tt-col-lg-4 padding-right-md-5-p">
-
-										<!-- Begin tt-Heading 
-												====================== 
-												* Use class "tt-heading-xsm", "tt-heading-sm", "tt-heading-lg", "tt-heading-xlg" or "tt-heading-xxlg" to set caption size (no class = default size).
-												* Use class "tt-heading-stroke" to enable stroke style.
-												* Use class "tt-heading-center" to align tt-Heading to center.
-												* Use prepared helper class "max-width-*" to add custom width if needed. Example: "max-width-800". More info about helper classes can be found in the file "helper.css".
-												-->
-										<div class="tt-heading tt-heading-sm margin-bottom-60 anim-fadeinup">
-											<h2 class="tt-heading-title text-gray">Why Change<br class="hide-from-md">
-												Rebellion?</h2>
-											<!-- <h3 class="tt-heading-subtitle text-gray">Subtitle</h3> -->
-										</div>
-										<!-- End tt-Heading -->
-
-									</div> <!-- /.tt-col -->
-
-									<div class="tt-col-lg-4">
-
-										<ul class="list-styled">
-											<li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="services.html" class="tt-link"
-														target="_blank" rel="noopener">Fixed Pricing</a>
-												</h5>
-												<p class="text-gray">Transparency throughout, no upselling. </p>
-											</li>
-											<li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="services.html" class="tt-link"
-														target="_blank" rel="noopener">Unparalleled Expertise</a>
-												</h5>
-												<p class="text-gray">Only experienced professionals. Battle scars are a
-													prerequisite.</p>
-											</li>
-											<!-- <li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="packages.html"
-														class="tt-link" target="_blank" rel="noopener">USP</a></h5>
-												<p class="text-gray">Pellentesque et fermentum.</p>
-											</li>
-											<li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="packages.html"
-														class="tt-link" target="_blank" rel="noopener">l&d</a></h5>
-												<p class="text-gray">In non leo quis risus blandit.</p>
-											</li> -->
-										</ul>
-
-									</div> <!-- /.tt-col -->
-
-									<div class="tt-col-lg-4">
-
-										<ul class="list-styled">
-											<li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="services.html" class="tt-link"
-														target="_blank" rel="noopener">Human-centric</a>
-												</h5>
-												<p class="text-gray">We prioritise the needs, experiences, and
-													well-being of people above all else.</p>
-											</li>
-											<li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="services.html" class="tt-link"
-														target="_blank" rel="noopener">Compassionate Guidance</a></h5>
-												<p class="text-gray">Navigating your path with care and empathy.</p>
-											</li>
-											<!-- <li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="packages.html"
-														class="tt-link" target="_blank" rel="noopener">Creative
-														Competition</a></h5>
-												<p class="text-gray">Aliquam tellus leone.</p>
-											</li>
-											<li class="anim-fadeinup">
-												<h5 class="no-margin"><a href="packages.html"
-														class="tt-link" target="_blank" rel="noopener">USP</a></h5>
-												<p class="text-gray">Phasellus a interdum tellus.</p>
-											</li> -->
-										</ul>
-
-									</div> <!-- /.tt-col -->
-								</div> <!-- /.tt-row -->
-
-							</div> <!-- /.tt-section-inner -->
-						</div>
-						<!-- End tt-section -->
-
-
-						<!-- =======================
-						///// Begin tt-section /////
-						============================ 
-						* You can use padding classes if needed. For example "padding-top-xlg-150", "padding-bottom-xlg-150", "no-padding-top", "no-padding-bottom", etc. Note that each situation may be different and each section may need different classes according to your needs. More info about helper classes can be found in the file "helper.css".
-						-->
-
-					</div>
-					<!-- End tt-section -->
-
-
-
-
-
-
-					<!-- =======================
-						///// Begin tt-section /////
-						============================ 
-						* You can use padding classes if needed. For example "padding-top-xlg-150", "padding-bottom-xlg-150", "no-padding-top", "no-padding-bottom", etc. Note that each situation may be different and each section may need different classes according to your needs. More info about helper classes can be found in the file "helper.css".
-						-->
-					<div class="tt-section padding-top-xlg-150 padding-bottom-xlg-150">
-						<div class="tt-section-inner tt-wrap">
-
-
-							<div
-								class="tt-heading tt-heading-xxlg tt-heading-stroke tt-heading-center margin-bottom-10-p anim-fadeinup">
-								<h3 class="tt-heading-subtitle text-gray">Our</h3>
-								<h2 class="tt-heading-title">Awards</h2>
-
-							</div>
-
-							<ul class="tt-logo-wall cl-col-3 anim-fadeinup" style="border: none;">
-								<li style="border: none;"><img src="img/circle.webp" alt="winner"
-										style="max-width: 70%; height: auto;">
-								</li>
-								<li style="border: none;"><img src="img/allica.webp" alt="winner"
-										style="max-width: 70%; height: auto;">
-								</li>
-								<li style="border: none;"><img src="img/winner.webp" alt="winner"
-										style="max-width: 70%; height: auto;">
-								</li>
-								<li style="border: none;"><img src="img/brilliance.webp" alt="winner"
-										style="max-width: 70%; height: auto;">
-								</li>
-								<li style="border: none;"><img src="img/iw.jpeg" alt="winner"
-										style="max-width: 70%; height: auto;">
-								</li>
-								<li style="border: none;"><img src="img/diamond.jpeg" alt="winner"
-										style="max-width: 70%; height: auto;">
-								</li>
-
-
-
-
-							</ul>
-
-
-						</div>
-					</div>
-					<!-- End tt-section -->
 
 
 
@@ -941,8 +1083,33 @@
 	<!-- Theme master JS -->
 	<script src="assets/js/theme.js"></script>
 
+	<script>
+		(function () {
+			var body = document.body;
+			var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+			if (!body || !body.classList.contains("rgg-page")) {
+				return;
+			}
+
+			if (reduceMotion) {
+				body.classList.remove("black-mode", "transitioning");
+				body.classList.add("green-mode");
+				return;
+			}
+
+			window.setTimeout(function () {
+				body.classList.add("transitioning", "green-mode");
+			}, 800);
+
+			window.setTimeout(function () {
+				body.classList.remove("black-mode", "transitioning");
+			}, 1680);
+		}());
+	</script>
 
 
-</body>
+
+	</body>
 
 </html>
