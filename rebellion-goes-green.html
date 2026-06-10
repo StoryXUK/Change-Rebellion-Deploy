@@ -65,6 +65,60 @@
 			color: #fff;
 		}
 
+		body.rgg-page.black-mode {
+			background: #0a0a0a;
+			color: #fff;
+		}
+
+		body.rgg-page.black-mode #body-inner {
+			background: #0a0a0a;
+			color: #fff;
+			filter: grayscale(1) contrast(1.08);
+		}
+
+		body.rgg-page.black-mode #page-header,
+		body.rgg-page.black-mode #content-wrap,
+		body.rgg-page.black-mode #page-content {
+			background: #0a0a0a;
+			color: #fff;
+		}
+
+		body.rgg-page.black-mode .ph-caption-title,
+		body.rgg-page.black-mode .ph-caption-subtitle,
+		body.rgg-page.black-mode .tt-heading-title,
+		body.rgg-page.black-mode .tt-heading-subtitle,
+		body.rgg-page.black-mode h1,
+		body.rgg-page.black-mode h2,
+		body.rgg-page.black-mode h3,
+		body.rgg-page.black-mode h4,
+		body.rgg-page.black-mode h5 {
+			color: #fff;
+		}
+
+		body.rgg-page.black-mode p,
+		body.rgg-page.black-mode li,
+		body.rgg-page.black-mode .text-gray {
+			color: rgba(255, 255, 255, 0.72) !important;
+		}
+
+		body.rgg-page.black-mode .rgg-pricing-card {
+			background: rgba(255, 255, 255, 0.055);
+			border-color: rgba(255, 255, 255, 0.18);
+		}
+
+		body.rgg-page.black-mode .rgg-pricing-card h3,
+		body.rgg-page.black-mode .rgg-pricing-card .rgg-card-label,
+		body.rgg-page.black-mode .rgg-pricing-card .rgg-price {
+			color: #fff;
+		}
+
+		body.rgg-page.black-mode .rgg-pricing-card .rgg-card-intro,
+		body.rgg-page.black-mode .rgg-pricing-card li,
+		body.rgg-page.black-mode .rgg-pricing-card .rgg-price-label,
+		body.rgg-page.black-mode .rgg-pricing-card .rgg-price-note {
+			color: rgba(255, 255, 255, 0.72);
+		}
+
 		body.rgg-page.green-mode {
 			background:
 				radial-gradient(circle at 50% 16%, rgba(182, 211, 177, 0.32), transparent 36%),
@@ -977,11 +1031,12 @@
 			}
 
 			window.setTimeout(function () {
+				body.classList.remove("black-mode");
 				body.classList.add("transitioning", "green-mode");
 			}, 1500);
 
 			window.setTimeout(function () {
-				body.classList.remove("black-mode", "transitioning");
+				body.classList.remove("transitioning");
 			}, 2380);
 		}());
 	</script>
