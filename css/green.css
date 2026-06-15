@@ -456,8 +456,10 @@ body.rgg-page {
 		.rgg-cso-panel {
 			position: relative;
 			display: grid;
-			grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.35fr);
-			gap: 38px 56px;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 30px;
+			max-width: 860px;
+			margin: 0 auto;
 			padding: 48px;
 			overflow: hidden;
 			background:
@@ -476,10 +478,7 @@ body.rgg-page {
 		}
 
 		.rgg-cso-profile {
-			display: grid;
-			grid-template-columns: 86px 1fr;
-			gap: 24px;
-			align-items: center;
+			max-width: 680px;
 		}
 
 		.rgg-cso-avatar {
@@ -499,7 +498,7 @@ body.rgg-page {
 
 		.rgg-cso-profile h3 {
 			margin: 8px 0 10px;
-			font-size: 34px;
+			font-size: 38px;
 			font-weight: 500;
 			line-height: 1.1;
 			color: #fff;
@@ -534,20 +533,35 @@ body.rgg-page {
 		}
 
 		.rgg-cso-contact {
-			grid-column: 1 / -1;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 14px;
 			padding-top: 30px;
 			border-top: 1px solid rgba(255, 255, 255, 0.13);
 		}
 
 		.rgg-cso-contact-link {
-			display: inline-flex;
+			display: flex;
 			align-items: center;
 			gap: 16px;
+			min-height: 72px;
+			padding: 12px 14px;
 			color: #fff;
+			background: rgba(255, 255, 255, 0.045);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 8px;
+			transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 		}
 
 		.rgg-cso-contact-link:hover {
 			color: #fff;
+			background: rgba(255, 255, 255, 0.07);
+			border-color: rgba(213, 194, 122, 0.48);
+			transform: translateY(-2px);
+		}
+
+		.rgg-cso-contact-link > span:last-child {
+			min-width: 0;
 		}
 
 		.rgg-cso-contact-icon {
@@ -608,6 +622,16 @@ body.rgg-page {
 
 		body.rgg-page.green-mode .rgg-cso-contact {
 			border-top-color: var(--rgg-border);
+		}
+
+		body.rgg-page.green-mode .rgg-cso-contact-link {
+			background: rgba(255, 255, 250, 0.56);
+			border-color: rgba(24, 59, 42, 0.12);
+		}
+
+		body.rgg-page.green-mode .rgg-cso-contact-link:hover {
+			background: rgba(255, 255, 250, 0.84);
+			border-color: rgba(24, 59, 42, 0.24);
 		}
 
 		body.rgg-page.green-mode .rgg-cso-contact-icon {
@@ -686,7 +710,6 @@ body.rgg-page {
 			}
 
 			.rgg-cso-panel {
-				grid-template-columns: 1fr;
 				padding: 38px 30px;
 			}
 
@@ -705,8 +728,7 @@ body.rgg-page {
 			}
 
 			.rgg-cso-profile {
-				grid-template-columns: 1fr;
-				gap: 18px;
+				max-width: none;
 			}
 
 			.rgg-cso-profile h3 {
