@@ -1,7 +1,7 @@
 :root {
   --cr-ink: #090b0a;
   --cr-paper: #f1f2e9;
-  --cr-acid: #c7f36b;
+  --cr-acid: #f1f2e9;
   --cr-green: #173c2b;
   --cr-line: rgba(241, 242, 233, .18);
   --cr-muted: rgba(241, 242, 233, .65);
@@ -25,7 +25,7 @@ a { color: inherit; }
 .case-menu-button { display: block; position: relative; z-index: 2; border: 0; color: white; background: none; font: 500 13px Poppins, sans-serif; cursor: pointer; }
 
 .case-library-hero { min-height: 90vh; padding: 190px 0 80px; display: grid; align-items: end; border-bottom: 1px solid var(--cr-line); position: relative; overflow: hidden; }
-.case-library-hero::after { content: "13"; position: absolute; right: -1vw; bottom: -10vw; font: 800 clamp(280px, 43vw, 720px)/.8 Poppins, sans-serif; color: transparent; -webkit-text-stroke: 1px rgba(210,211,207,.14); }
+.case-library-hero::after { content: "12"; position: absolute; right: -1vw; bottom: -10vw; font: 800 clamp(280px, 43vw, 720px)/.8 Poppins, sans-serif; color: transparent; -webkit-text-stroke: 1px rgba(210,211,207,.14); }
 .case-kicker { display: flex; gap: 16px; align-items: center; color: var(--cr-acid); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
 .case-kicker::before { content: ""; width: 42px; height: 2px; background: currentColor; }
 .case-library-title { position: relative; z-index: 1; max-width: 1100px; margin: 26px 0 30px; font-size: clamp(64px, 10vw, 160px); font-weight: 700; line-height: .82; letter-spacing: -.075em; }
