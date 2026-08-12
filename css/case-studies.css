@@ -35,11 +35,15 @@ a { color: inherit; }
 .case-scroll-cue { justify-self: end; color: var(--cr-muted); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; }
 
 .case-library { padding: 90px 0 150px; }
-.case-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-bottom: 55px; }
+.case-toolbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 50px; margin-bottom: 70px; }
 .case-count { color: var(--cr-muted); font-size: 13px; letter-spacing: .1em; text-transform: uppercase; }
 .case-count strong { color: var(--cr-paper); font-size: 26px; margin-right: 8px; }
+.case-industries { width: min(100%, 980px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; }
+.case-industries a { min-width: 0; padding: 13px 2px; border-top: 1px solid var(--cr-line); display: flex; gap: 12px; align-items: baseline; color: var(--cr-paper); font-size: 11px; font-weight: 500; line-height: 1.35; letter-spacing: .06em; text-decoration: none; text-transform: uppercase; transition: color .25s, padding-left .25s; }
+.case-industries a:hover { padding-left: 7px; color: var(--cr-acid); }
+.case-industries span { flex: none; color: var(--cr-muted); font-size: 9px; }
 .case-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 34px 24px; }
-.case-card { grid-column: span 4; position: relative; min-width: 0; }
+.case-card { grid-column: span 4; position: relative; min-width: 0; scroll-margin-top: 95px; }
 .case-card:nth-child(5n+1), .case-card:nth-child(5n+5) { grid-column: span 7; }
 .case-card:nth-child(5n+2), .case-card:nth-child(5n+4) { grid-column: span 5; }
 .case-card[hidden] { display: none; }
@@ -99,6 +103,7 @@ a { color: inherit; }
   .case-hero-bottom { grid-template-columns: 1fr; }
   .case-scroll-cue { display: none; }
   .case-toolbar { align-items: flex-start; flex-direction: column; }
+  .case-industries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .case-card, .case-card:nth-child(n) { grid-column: span 6; }
   .case-card-image, .case-card:nth-child(3n) .case-card-image { height: 52vw; }
   .case-story-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -110,6 +115,7 @@ a { color: inherit; }
   .case-logo img { width: 125px; }
   .case-library-title { font-size: 18vw; }
   .case-library { padding: 60px 0 100px; }
+  .case-industries { grid-template-columns: 1fr; }
   .case-grid { display: block; }
   .case-card { margin-bottom: 25px; }
   .case-card-image, .case-card:nth-child(3n) .case-card-image { height: 115vw; max-height: 580px; }

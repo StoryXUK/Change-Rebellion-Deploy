@@ -57,12 +57,15 @@
     });
   }
   function card(study, index) {
-    return '<article class="case-card"><a class="case-card-link" href="case-study-' + study.id + '.html"><div class="case-card-image">' + imageMarkup(study, false) + '<span class="case-card-index">' + pad(index + 1) + ' / ' + studies.length + '</span><span class="case-card-arrow">&#8599;</span></div><div class="case-card-copy"><div class="case-card-sector">' + study.industry + '</div><h2 class="case-card-title">' + study.title + '</h2></div></a></article>';
+    return '<article class="case-card" id="case-study-' + study.id + '"><a class="case-card-link" href="case-study-' + study.id + '.html"><div class="case-card-image">' + imageMarkup(study, false) + '<span class="case-card-index">' + pad(index + 1) + ' / ' + studies.length + '</span><span class="case-card-arrow">&#8599;</span></div><div class="case-card-copy"><div class="case-card-sector">' + study.industry + '</div><h2 class="case-card-title">' + study.title + '</h2></div></a></article>';
+  }
+  function industryLink(study, index) {
+    return '<a href="#case-study-' + study.id + '" aria-label="Go to ' + study.title + '"><span>' + pad(index + 1) + '</span>' + study.industry + '</a>';
   }
   function renderLibrary() {
     var app = document.getElementById('case-app');
     if (!app) return;
-    app.innerHTML = header() + '<main><section class="case-library-hero"><div class="case-shell"><div class="case-kicker">Change Rebellion / Case Studies</div><h1 class="case-library-title">Change at <em>scale.</em></h1><div class="case-hero-bottom"><p class="case-hero-intro">Real transformations. Complex organisations. Change delivered across sector, system and scale.</p><div class="case-scroll-cue">Scroll to explore &darr;</div></div></div></section><section class="case-library"><div class="case-shell"><div class="case-toolbar"><div class="case-count"><strong>' + studies.length + '</strong> engagements</div></div><div class="case-grid">' + studies.map(card).join('') + '</div></div></section></main>' + footer();
+    app.innerHTML = header() + '<main><section class="case-library-hero"><div class="case-shell"><div class="case-kicker">Change Rebellion / Case Studies</div><h1 class="case-library-title">Change at <em>scale.</em></h1><div class="case-hero-bottom"><p class="case-hero-intro">Real transformations. Complex organisations. Change delivered across sector, system and scale.</p><div class="case-scroll-cue">Scroll to explore &darr;</div></div></div></section><section class="case-library"><div class="case-shell"><div class="case-toolbar"><div class="case-count"><strong>' + studies.length + '</strong> engagements</div><nav class="case-industries" aria-label="Jump to a case study by industry">' + studies.map(industryLink).join('') + '</nav></div><div class="case-grid">' + studies.map(card).join('') + '</div></div></section></main>' + footer();
     bindMenu();
   }
   function renderDetail() {
