@@ -7,7 +7,7 @@
 	var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 	new Swiper(slider, {
-		slidesPerView: 1,
+		slidesPerView: 1.08,
 		spaceBetween: 22,
 		speed: 750,
 		loop: true,
@@ -27,8 +27,8 @@
 			type: "progressbar"
 		},
 		breakpoints: {
-			680: { slidesPerView: 2, spaceBetween: 22 },
-			1100: { slidesPerView: 3, spaceBetween: 28 }
+			680: { slidesPerView: 2.15, spaceBetween: 22 },
+			1100: { slidesPerView: 3.25, spaceBetween: 28 }
 		}
 	});
 }());

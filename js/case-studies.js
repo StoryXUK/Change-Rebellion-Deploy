@@ -16,7 +16,25 @@
     { title: "Records Management Transformation, Central Government", sector: "Public Sector, Central Government", group: "Public sector", challenge: "A short, focused engagement leading an Electronic Document and Records Management project for a UK government agency—the kind of unglamorous but essential public sector change work that underpins how government departments actually manage information day to day.", response: "Engagement was run directly with the teams who owned the records day to day, spanning the agency's UK-wide offices. We mapped how documents actually moved through the organisation, then shaped retention, filing and retrieval around that reality. Staff joined the design conversation early, and communication and training were phased alongside rollout so each team got support when it was needed.", result: "A records management process redesigned around staff spread across the agency's UK-wide offices, not just its headquarters, with engagement run team by team rather than through a single central briefing." }
   ];
 
-  studies.forEach(function (study, index) { study.id = index < 9 ? index + 1 : index + 2; });
+  var industries = [
+    "Mergers & Acquisitions",
+    "Energy / Utilities",
+    "Oil & Gas",
+    "Public Sector",
+    "Healthcare",
+    "National Infrastructure",
+    "Financial Services",
+    "Insurance",
+    "Energy / Utilities",
+    "Rail Infrastructure",
+    "Water & Utilities",
+    "Central Government"
+  ];
+
+  studies.forEach(function (study, index) {
+    study.id = index < 9 ? index + 1 : index + 2;
+    study.industry = industries[index];
+  });
 
   function pad(value) { return String(value).padStart(2, "0"); }
   function imageMarkup(study, detail) {
@@ -39,22 +57,12 @@
     });
   }
   function card(study, index) {
-    return '<article class="case-card" data-group="' + study.group + '"><a class="case-card-link" href="case-study-' + study.id + '.html"><div class="case-card-image">' + imageMarkup(study, false) + '<span class="case-card-index">' + pad(index + 1) + ' / ' + studies.length + '</span><span class="case-card-arrow">&#8599;</span></div><div class="case-card-copy"><div class="case-card-sector">' + study.sector + '</div><h2 class="case-card-title">' + study.title + '</h2></div></a></article>';
+    return '<article class="case-card"><a class="case-card-link" href="case-study-' + study.id + '.html"><div class="case-card-image">' + imageMarkup(study, false) + '<span class="case-card-index">' + pad(index + 1) + ' / ' + studies.length + '</span><span class="case-card-arrow">&#8599;</span></div><div class="case-card-copy"><div class="case-card-sector">' + study.industry + '</div><h2 class="case-card-title">' + study.title + '</h2></div></a></article>';
   }
   function renderLibrary() {
     var app = document.getElementById('case-app');
     if (!app) return;
-    var groups = ['All', 'Digital', 'Capability', 'Transformation', 'Public sector', 'Behaviour'];
-    app.innerHTML = header() + '<main><section class="case-library-hero"><div class="case-shell"><div class="case-kicker">Change Rebellion / Case Studies</div><h1 class="case-library-title">Change at <em>scale.</em></h1><div class="case-hero-bottom"><p class="case-hero-intro">Real transformations. Complex organisations. Change delivered across sector, system and scale.</p><div class="case-scroll-cue">Scroll to explore &darr;</div></div></div></section><section class="case-library"><div class="case-shell"><div class="case-toolbar"><div class="case-count"><strong>' + studies.length + '</strong> engagements</div><div class="case-filters" aria-label="Filter case studies">' + groups.map(function (group, index) { return '<button class="case-filter' + (index === 0 ? ' is-active' : '') + '" data-filter="' + group + '">' + group + '</button>'; }).join('') + '</div></div><div class="case-grid">' + studies.map(card).join('') + '</div></div></section></main>' + footer();
-    document.querySelectorAll('.case-filter').forEach(function (button) {
-      button.addEventListener('click', function () {
-        var filter = button.dataset.filter;
-        document.querySelectorAll('.case-filter').forEach(function (item) { item.classList.toggle('is-active', item === button); });
-        var visible = 0;
-        document.querySelectorAll('.case-card').forEach(function (item) { item.hidden = filter !== 'All' && item.dataset.group !== filter; if (!item.hidden) visible += 1; });
-        document.querySelector('.case-count strong').textContent = pad(visible);
-      });
-    });
+    app.innerHTML = header() + '<main><section class="case-library-hero"><div class="case-shell"><div class="case-kicker">Change Rebellion / Case Studies</div><h1 class="case-library-title">Change at <em>scale.</em></h1><div class="case-hero-bottom"><p class="case-hero-intro">Real transformations. Complex organisations. Change delivered across sector, system and scale.</p><div class="case-scroll-cue">Scroll to explore &darr;</div></div></div></section><section class="case-library"><div class="case-shell"><div class="case-toolbar"><div class="case-count"><strong>' + studies.length + '</strong> engagements</div></div><div class="case-grid">' + studies.map(card).join('') + '</div></div></section></main>' + footer();
     bindMenu();
   }
   function renderDetail() {
