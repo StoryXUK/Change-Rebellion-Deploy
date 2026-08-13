@@ -68,7 +68,7 @@
 .home-cases-slider { overflow: visible; }
 .home-cases-slider .swiper-slide { height: auto; }
 .home-case-card { height: 100%; display: flex; position: relative; flex-direction: column; color: white; text-decoration: none; }
-.home-case-image { height: clamp(260px, 27vw, 420px); position: relative; overflow: hidden; background: #173c2b; }
+.home-case-image { height: clamp(240px, 24vw, 390px); position: relative; overflow: hidden; background: #173c2b; }
 .home-case-image::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 52%, rgba(5, 8, 6, .55)); }
 .home-case-image img { width: 100%; height: 100%; display: block; object-fit: cover; filter: saturate(.7); transition: transform .7s cubic-bezier(.16, 1, .3, 1), filter .4s; }
 .home-case-card:hover .home-case-image img { transform: scale(1.05); filter: saturate(1); }
@@ -90,7 +90,7 @@
 	.home-cases-heading { align-items: flex-start; flex-direction: column; margin-bottom: 42px; }
 	.home-cases-heading h2 { font-size: 17vw; }
 	.home-cases-controls { align-self: flex-end; }
-	.home-case-image { height: 96vw; max-height: 480px; }
+	.home-case-image { height: 90vw; max-height: 450px; }
 	.home-case-card h3 { font-size: 26px; }
 	.home-cases-footer { align-items: flex-start; flex-direction: column; }
 }
